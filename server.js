@@ -5,7 +5,7 @@ const helmet = require(`helmet`);
 const morgan = require(`morgan`);
 
 const routes = require(`./routes/index`);
-const { connectDB } = require(`./config/db`);
+const { sequelize, connectDB } = require(`./config/db`);
 
 const app = express();
 
@@ -22,7 +22,8 @@ app.use(`/api`, routes);
 // Database Connection
 connectDB()
   .then(() => console.log(`Database Connected`))
-  .catch((err) => console.error(`Database Connection Failed`, err));
+  .catch((err) => console.error(`Database Connection Failed:`, err));
+
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
